@@ -25,6 +25,11 @@ docker run -it --name tcserver -v /your_path/teamcity/data:/data/teamcity_server
 ```
 I'm using the internal HSQLDB database provided by the image to avoid futher setup, if you have time use an external option!
 
+To test and start TeamCity go to:
+```sh
+http://localhost:8111
+```
+
 ### TeamCity Agent 
 There is two version for agents standar and minimal, I used the standard one, you can try with the minimal both will work fine. The standard version is a heavy image to download, so be patient (current local size used: 1.03GB).
 ```sh
@@ -74,4 +79,8 @@ docker build -t twogg/tomcat .
 Now run the container, we are using admin/admin as user and password, and 8787 is going to be our deploy port for TeamCity.
 ```sh
 docker run -d -p 8787:8080 --name tctomcat twogg/tomcat
+```
+Test the new artifact in: 
+```sh
+http://localhost:8787/ci-teamcity
 ```
