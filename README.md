@@ -35,7 +35,7 @@ TeamCity Agents will not work with *localhost* as SERVER_URL, so please use your
 docker start tcagent
 ```
 
-### Adding local agent to the server
+#### Adding agents to the server
 For the final step, you have to authorize manually your local agent here:
 ```sh
 http://localhost:8111/agents.html?tab=unauthorizedAgents
