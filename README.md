@@ -45,6 +45,7 @@ http://localhost:8111/agents.html?tab=unauthorizedAgents
 
 ##### Create a new project
 You can build from an URL, GitHub, Bitbucket, VisualStudioTeam, and a manually configurated repository. Here we are going to use GitHub. You will we asked to connect with your account, then select the repository. It's possible to build the same code in different TeamCity projects, for example master and QA branches. After you select the repository, you need to setup the  build steps. 
+
 ![teamcity_setup_steps](imgs/tc_setup_steps.png)
 
 ##### Clean-Test
@@ -53,12 +54,16 @@ With this setup it will being executed the unit test configured in the source an
 
 ##### Package
 ![teamcity_setup_step2](imgs/tc_setup_step2.png)
+
 After being successfully executed the test, we create a .war file to be deployed. 
+
 ![teamcity_artifact](tc_artifact.png)
+
 You can access the artifact created in TeamCity overview page. 
 
 ##### Deploy
 ![teamcity_setup_step3](imgs/tc_setup_step3.png)
+
 In the new version of TeamCity is possible to deploy the artifact created or the result of a previous step. Here we are setting up a deploy in a Tomcat container running locally. 
 
 #### Local Tomcat container
