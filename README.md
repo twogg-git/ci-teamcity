@@ -1,4 +1,4 @@
-
+![header](imgs/header.png)
 ### CI with TeamCity and Dokcer
 
 Working with TeamCity + Docker to setup a CI pipeline for a Java REST app
@@ -43,14 +43,33 @@ The final step, you have to authorize manually your local agent here:
 http://localhost:8111/agents.html?tab=unauthorizedAgents
 ```
 
-#### Deploying the artifact to a Tomcat container
+#### TeamCity Setup
 
-##### Tomcar container
-In the new version on TeamCity is possible to deploy directly to a container locally or remote, we are going to use the same Tomcat 8.0 image, but adding context and user setup. Go to */tomcat* folder and then build the Dockerfile.
+##### Create a new project
+You can build from an URL, GitHub, Bitbucket, VisualStudioTeam, and manually setup repositories. Here we are going to use GitHub. You will we asked to connect with your account, then select the repository. Is possible to build the same code in different project, for example master and QA branches. After you select the repository, it goes the setup the build steps. 
+![teamcity_setup_steps](imgs/tc_setup_steps.png)
+
+##### Clean-Test
+![teamcity_setup_step1](imgs/tc_setup_step1.png)
+With this setup will being executed the unit test configured in the pom.xml file. I'm using Junit 4.12 version.
+
+##### Package
+![teamcity_setup_step2](imgs/tc_setup_step2.png)
+After being successfully executed the test, we create a .war file to be deployed. 
+![teamcity_artifact](tc_artifact.png)
+You can access the artifact created in TeamCity overview page. 
+
+##### Deploy
+![teamcity_setup_step3](imgs/tc_setup_step3.png)
+In the new version of TeamCity is possible to deploy the artifact created or the result of a previous step. Here we are setting up a deploy in a Tomcat container running locally. 
+
+#### Local Tomcat container
+
+To deploy locally, we are going to use the same Tomcat 8.0 image from the beginning, but adding context and user setup. Go to */tomcat* folder and then build the Dockerfile.
 ```sh
 docker build -t twogg/tomcat .
 ```
-Now run the container, we re using admin/admin as user and password, and 8787 is going to be our deploy port for TeamCity.
+Now run the container, we are using admin/admin as user and password, and 8787 is going to be our deploy port for TeamCity.
 ```sh
 docker run -d -p 8787:8080 --name tctomcat twogg/tomcat
 ```
