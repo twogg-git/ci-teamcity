@@ -58,7 +58,7 @@ After being successfully executed the test, we create a .war file to be deployed
 
 You can access the artifact created in the overview page. 
 
-![teamcity_artifact](imags/tc_artifact.png)
+![teamcity_artifact](imgs/tc_artifact.png)
 
 ### Deploy
 In the new version of TeamCity is possible to deploy the artifact created or the result of a previous step. Here we are setting up a deploy in a Tomcat container running locally. 
