@@ -1,7 +1,7 @@
 ![header](imgs/header.png)
 ## CI with Java, TeamCity, and Dokcer
 
-#### Java REST App
+### Java REST App
 Here is the Docker command to run the java app with a Tomcat 8.0 server. Please take care that we have to use Java 1.7 because of this specifical Tomcat version. I added the .war copy command to deployed automatically. 
 ```sh
 docker run --rm -v /your_path/ci-teamcity/target/ci-teamcity.war:/usr/local/tomcat/webapps/ci-teamcity.war -it -p 8585:8080 --name=tomcat tomcat:8.0
@@ -18,14 +18,14 @@ http://localhost:8585/ci-teamcity
 ```
 I added two more rest services a dummy hello call */javatest/hello* and a test/id validation *test/error*.
 
-#### TeamCity Server 
+### TeamCity Server 
 First create two folders */data* and */logs* to storage what TC needs. This image will take a while to download (current local size used: 1.52GB).
 ```sh
 docker run -it --name tcserver -v /your_path/teamcity/data:/data/teamcity_server/datadir -v /your_path/teamcity/logs:/opt/teamcity/logs -p 8111:8111 jetbrains/teamcity-server
 ```
 I'm using the internal HSQLDB database provided by the image to avoid futher setup, if you have time use an external option!
 
-#### TeamCity Agent 
+### TeamCity Agent 
 There is two version for agents standar and minimal, I used the standard one, you can try with the minimal both will work fine. The standard version is a heavy image to download, so be patient (current local size used: 1.03GB).
 ```sh
 docker run --name tcagent -it -e SERVER_URL="your_ip:8111" -p 9090:9090 -v /your_path/teamcity/agent:/data/teamcity_agent/conf jetbrains/teamcity-agent
@@ -35,38 +35,37 @@ TeamCity Agents will not work with *localhost* as SERVER_URL, so please use your
 docker start tcagent
 ```
 
-#### Adding local agent to the server
+### Adding local agent to the server
 For the final step, you have to authorize manually your local agent here:
 ```sh
 http://localhost:8111/agents.html?tab=unauthorizedAgents
 ```
 
-#### TeamCity Setup
+## TeamCity Setup
 
-##### Create a new project
+### Create a new project
 You can build from an URL, GitHub, Bitbucket, VisualStudioTeam, and a manually configurated repository. Here we are going to use GitHub. You will we asked to connect with your account, then select the repository. It's possible to build the same code in different TeamCity projects, for example master and QA branches. After you select the repository, you need to setup the  build steps. 
 
-![teamcity_setup_steps](imgs/tc_setup_steps.png)
-
-##### Clean-Test
-![teamcity_setup_step1](imgs/tc_setup_step1.png)
+### Clean-Test
 With this setup it will being executed the unit test configured in the source and by the configuration in the pom.xml file. I'm using Junit 4.12 version.
 
-##### Package
-![teamcity_setup_step2](imgs/tc_setup_step2.png)
+![teamcity_setup_step1](imgs/tc_setup_step1.png)
 
+### Package
 After being successfully executed the test, we create a .war file to be deployed. 
 
-![teamcity_artifact](tc_artifact.png)
+![teamcity_setup_step2](imgs/tc_setup_step2.png)
 
-You can access the artifact created in TeamCity overview page. 
+You can access the artifact created in the overview page. 
 
-##### Deploy
-![teamcity_setup_step3](imgs/tc_setup_step3.png)
+![teamcity_artifact](imags/tc_artifact.png)
 
+### Deploy
 In the new version of TeamCity is possible to deploy the artifact created or the result of a previous step. Here we are setting up a deploy in a Tomcat container running locally. 
 
-#### Local Tomcat container
+![teamcity_setup_step3](imgs/tc_setup_step3.png)
+
+### Local Tomcat container
 
 To deploy locally, we are going to use the same Tomcat 8.0 image from the beginning, but adding context and user setup. Go to */tomcat* folder and then build the Dockerfile.
 ```sh
