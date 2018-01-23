@@ -16,7 +16,7 @@ Test the app going to:
 ```sh
 http://localhost:8585/ci-teamcity
 ```
-I added two more rest services a dummy hello call */javatest/hello* and a test/id validation *test/error*.
+I added two more rest services a dummy hello call */ci-teamcity/hello* and a test/id validation */ci-teamcity/test/1*.
 
 ### TeamCity Server 
 First create two folders */data* and */logs* to storage what TC needs. This image will take a while to download (current local size used: 1.52GB).
