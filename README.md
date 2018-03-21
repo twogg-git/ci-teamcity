@@ -1,6 +1,8 @@
 ![header](imgs/header.png)
 ## CI with Java, TeamCity, and Dokcer
 
+[![Build Status](https://travis-ci.org/twogg-git/ci-teamcity.svg?branch=master)](https://travis-ci.org/twogg-git/ci-teamcity)
+
 ### Java REST App
 Here is the Docker command to run the java app with a Tomcat 8.0 server. Please take care that we have to use Java 1.7 because of this specifical Tomcat version. I added the .war copy command to deployed automatically. 
 ```sh
