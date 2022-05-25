@@ -13,7 +13,7 @@
         <project.source.version>${java.version}</project.source.version>
         <project.target.version>${java.version}</project.target.version>
         <project.encoding>UTF-8</project.encoding>
-        <spring.version>4.3.20.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
     </properties>
 
     <dependencies>
