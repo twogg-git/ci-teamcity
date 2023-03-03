@@ -1,4 +1,3 @@
-![header](imgs/header.png)
 ## CI with Java, TeamCity, and Dokcer
 
 [![Build Status](https://travis-ci.org/twogg-git/ci-teamcity.svg?branch=master)](https://travis-ci.org/twogg-git/ci-teamcity)
